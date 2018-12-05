@@ -76,14 +76,8 @@ BigInteger BigInteger:: operator*(const BigInteger &b) const {
     string s1 = this-> sNumber, s2 = b.sNumber, sResult = "";
     int s1Length = (int) s1.length(), s2Length = (int) s2.length();
     
-    int maximumLength = 0;
-    if (s1Length > s2Length) {
-        maximumLength = (int) s1Length;
-    } else {
-        maximumLength = (int) s2Length;
-    }
-    
-    int iProduct[10000+5];
+    const int MAX = 10005;
+    int iProduct[MAX];
     
     reverse(s1.begin(), s1.end()); reverse(s2.begin(), s2.end());
     
@@ -94,11 +88,11 @@ BigInteger BigInteger:: operator*(const BigInteger &b) const {
             iProduct[i + j] += (s1[i] - 48) * (s2[j] - 48);
         }
     }
-    for (int i = 0; i < maximumLength; i++) {
+    for (int i = 0; i < MAX; i++) {
         iProduct[i + 1] += iProduct[i] / 10;
         iProduct[i] %= 10;
     }
-    int i = maximumLength;
+    int i = MAX - 1;
     while (i > 0 && iProduct[i] == 0) {
         i--;
     }
